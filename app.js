@@ -3,7 +3,9 @@ var express = require('express');
 
 //Устанавливаем соединение с mongoose
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://Elisium:ujdyjbpgjgs@teahouse.sxvj0.mongodb.net/Teahouse?retryWrites=true&w=majority';
+//var mongoDB = 'mongodb+srv://Elisium:ujdyjbpgjgs@teahouse.sxvj0.mongodb.net/Teahouse?retryWrites=true&w=majority';
+var dev_db_url = 'mongodb+srv://Elisium:ujdyjbpgjgs@teahouse.sxvj0.mongodb.net/Teahouse?retryWrites=true&w=majority';
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
