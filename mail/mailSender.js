@@ -6,7 +6,7 @@ var transporter = mailer.createTransport({
     service: 'gmail',
     auth: {
         user: "titovstepan.shpora@gmail.com",
-        pass: "Rfptrfutgtcrf1"
+        pass: "tgrbjjxbjjtzoxct"
     }
 });
 
