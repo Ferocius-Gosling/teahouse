@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  p Добро пожаловать в чайную #[em "Жасминовый дракон"].
+
+  h1 Это есть в нашей чайной:
+
+  if error
+    p Error getting dynamic content.
+  else
+    ul
+      li #[strong Блюд:] !{data.dish_count}
+      li #[strong Всего столов:] !{data.table_count}
+      li #[strong Свободных столиков на данный момент:] !{data.available_table_count}

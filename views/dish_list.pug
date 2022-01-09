@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each dish in dish_list
+      li
+        a(href=dish.url) #{dish.name}
+        p #{dish.description}, #[strong Ценa:] #{dish.price} рублей.
+
+    else
+      li There are no books.

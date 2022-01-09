@@ -1,0 +1,17 @@
+.sidebar-nav {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 14px;
+  list-style: none;
+  background-color: #f0f8ff;
+  /* color: #000000; */
+  border: 10px; 
+}
+
+body {
+  background-color: #e6e6fa;
+}
+
+.form-group {
+  width: 570px;
+}

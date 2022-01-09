@@ -1,0 +1,12 @@
+extends layout
+
+block content
+
+  h1 Блюдо: #{dish.name}
+
+  div(style='margin-left:20px;margin-top:20px')
+    
+    img(src='/images/' + dish.filename style='width:640px;height:440px;')
+    p Описание: #{dish.description}
+    p Вес: #{dish.weight}
+    p Цена: #{dish.price}

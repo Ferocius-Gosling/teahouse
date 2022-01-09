@@ -1,0 +1,12 @@
+extends layout
+
+block content
+
+  h1 Стол: #{table.table_num}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    p Cтол расположен #{table.position}
+    hr
+    p
+    a(href=table.url+'/reserve') Забронировать столик

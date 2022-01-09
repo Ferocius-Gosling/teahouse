@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='date') Даты брони:
+      input#title.form-control(type='date', name='date' required='true' value=(''))
+    div.form-group
+      label(for='time') Время брони:
+      input#title.form-control(type='time', name='time' required='true' value=(''))
+    div.form-group
+      label(for='email') Ваша почта, мы отправим вам уведомление об успешной брони столика:
+      input#title.form-control(type='text', placeholder='example@example.com' name='email' required='true' value=(''))
+    button.btn.btn-primary(type='submit') Забронировать
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg
