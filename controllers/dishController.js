@@ -51,33 +51,3 @@ exports.dish_detail = function(req, res, next) {
         res.render('dish_detail', {title: 'Блюдо', dish: results.dish})
     });
 };
-
-// // Показать форму создания автора по запросу GET.
-// exports.author_create_get = function(req, res) {
-//     res.send('NOT IMPLEMENTED: Author create GET');
-// };
-
-// // Создать автора по запросу POST.
-// exports.author_create_post = function(req, res) {
-//     res.send('NOT IMPLEMENTED: Author create POST');
-// };
-
-// // Показать форму удаления автора по запросу GET.
-// exports.author_delete_get = function(req, res) {
-//     res.send('NOT IMPLEMENTED: Author delete GET');
-// };
-
-// // Удалить автора по запросу POST.
-// exports.author_delete_post = function(req, res) {
-//     res.send('NOT IMPLEMENTED: Author delete POST');
-// };
-
-// // Показать форму обновления автора по запросу GET.
-// exports.author_update_get = function(req, res) {
-//     res.send('NOT IMPLEMENTED: Author update GET');
-// };
-
-// // Обновить автора по запросу POST.
-// exports.author_update_post = function(req, res) {
-//     res.send('NOT IMPLEMENTED: Author update POST');
-// };

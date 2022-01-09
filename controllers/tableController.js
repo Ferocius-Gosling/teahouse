@@ -54,33 +54,13 @@ exports.table_reserve_get = function(req, res, next) {
                 err.status = 404;
                 return next(err);
             }
-            // Success.
-            // Mark our selected genres as checked.
-            // for (var all_g_iter = 0; all_g_iter < results.genres.length; all_g_iter++) {
-            //     for (var book_g_iter = 0; book_g_iter < results.book.genre.length; book_g_iter++) {
-            //         if (results.genres[all_g_iter]._id.toString()==results.book.genre[book_g_iter]._id.toString()) {
-            //             results.genres[all_g_iter].checked='true';
-            //         }
-            //     }
-            // }
+
             res.render('table_form', { title: 'Бронь столика'});
         });
 };
 
 // Handle book update on POST.
 exports.table_reserve_post = [
-
-    // Convert the genre to an array
-    // (req, res, next) => {
-    //     if(!(req.body. instanceof Array)){
-    //         if(typeof req.body.genre === 'undefined')
-    //         req.body.genre=[];
-    //         else
-    //         req.body.genre=new Array(req.body.genre);
-    //     }
-    //     next();
-    // },
-
     // Validate fields.
     body('time', 'Нужно выставить время')
     .trim()
@@ -98,28 +78,11 @@ exports.table_reserve_post = [
     .isLength({ min: 1 })
     .escape(),
 
-    // Sanitize fields.
-    // sanitizeBody('title').trim().escape(),
-    // sanitizeBody('author').trim().escape(),
-    // sanitizeBody('summary').trim().escape(),
-    // sanitizeBody('isbn').trim().escape(),
-    // sanitizeBody('genre.*').trim().escape(),
-
     // Process request after validation and sanitization.
     (req, res, next) => {
 
         // Extract the validation errors from a request.
         const errors = validationResult(req);
-
-        // Create a Book object with escaped/trimmed data and old id.
-        // var book = new Book(
-        //   { title: req.body.title,
-        //     author: req.body.author,
-        //     summary: req.body.summary,
-        //     isbn: req.body.isbn,
-        //     genre: (typeof req.body.genre==='undefined') ? [] : req.body.genre,
-        //     _id:req.params.id //This is required, or a new ID will be assigned!
-        //    });
 
         if (!errors.isEmpty()) {
             // There are errors. Render form again with sanitized values/error messages.
@@ -177,7 +140,7 @@ exports.table_reserve_post = [
                     mailSender.transporter.sendMail(
                         mailSender.configureMessageOptions(req.body.email, results.table.position)
                     )
-                    
+
                     res.render('table_form', {title: "Бронь столика", 
                     errors: [{msg: "Столик успешно забронирован"}]});
                 });
