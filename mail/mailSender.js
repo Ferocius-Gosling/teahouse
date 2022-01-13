@@ -5,8 +5,8 @@ var testAccount = mailer.createTestAccount();
 var transporter = mailer.createTransport({
     service: 'gmail',
     auth: {
-        user: "titovstepan.shpora@gmail.com",
-        pass: "tgrbjjxbjjtzoxct"
+        user: process.env.MAIL,
+        pass: process.env.MAIL_PASS
     }
 });
 
