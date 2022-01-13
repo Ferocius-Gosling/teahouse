@@ -1,8 +1,5 @@
 const mailer = require('nodemailer');
 
-console.log(process.env.MAIL);
-console.log(process.env.MAIL_PASS);
-
 var transporter = mailer.createTransport({
     service: 'gmail',
     auth: {
@@ -10,8 +7,6 @@ var transporter = mailer.createTransport({
         pass: process.env.MAIL_PASS
     }
 });
-
-console.log(transporter);
 
 var configureMessageOptions = function(to, position) {
     return {
