@@ -1,7 +1,5 @@
 const mailer = require('nodemailer');
 
-var testAccount = mailer.createTestAccount();
-
 console.log(process.env.MAIL);
 console.log(process.env.MAIL_PASS);
 
@@ -12,6 +10,8 @@ var transporter = mailer.createTransport({
         pass: process.env.MAIL_PASS
     }
 });
+
+console.log(transporter);
 
 var configureMessageOptions = function(to, position) {
     return {
