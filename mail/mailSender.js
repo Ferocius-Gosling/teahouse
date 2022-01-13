@@ -2,6 +2,9 @@ const mailer = require('nodemailer');
 
 var testAccount = mailer.createTestAccount();
 
+console.log(process.env.MAIL);
+console.log(process.env.MAIL_PASS);
+
 var transporter = mailer.createTransport({
     service: 'gmail',
     auth: {
