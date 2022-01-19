@@ -1,4 +1,5 @@
 var Table = require('../models/table');
+var Reservation = require('../models/reservation')
 var async = require('async');
 var console = require('console');
 var mailSender = require('../mail/mailSender');
@@ -107,6 +108,9 @@ exports.table_reserve_post = [
                     .populate('position')
                     .populate('datesReservation')
                     .exec(callback);
+                },
+                reservationsCount : function(callback) {
+                    Reservation.count({}, callback);
                 }
             }, function(err, results) {
                 if(err) {return next(err);}
@@ -133,16 +137,24 @@ exports.table_reserve_post = [
                     errors: [{msg: "Столик на это время уже забронирован. Выберите другое время"}]});
                     return;
                 }
+                var reservation = new Reservation({
+                    table: results.table,
+                    code: results.reservationsCount + 1,
+                    date: date
+                })
+
                 results.table.datesReservation.push(date);
                 results.table.save(function(err, table) {
                     if (err) {return next(err); }
+                    
+                    reservation.save(function(err, reserve) { if (err) {return next(err); } })
                     
                     mailSender.transporter.sendMail(
                         mailSender.configureMessageOptions(req.body.email, results.table.position)
                     )
 
                     res.render('table_form', {title: "Бронь столика", 
-                    errors: [{msg: "Столик успешно забронирован"}]});
+                    errors: [{msg: "Вам выслано письмо для подтверждения брони."}]});
                 });
             });
         }
