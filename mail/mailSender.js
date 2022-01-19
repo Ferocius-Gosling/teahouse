@@ -14,9 +14,9 @@ var configureMessageOptions = function(to, position, id) {
         to: to,
         subject: 'Бронь столика',
         text: "Вы хотели забронировать столик " + position + 
-        ". \n Для этого перейдите по ссылке " + window.location + "/reservations/confirm/" + id,
+        ". \n Для этого перейдите по ссылке https://teahousedragon.herokuapp.com/catalog/reservations/confirm/" + id,
         html:  "<p>Вы хотели забронировать столик <strong>" + position + "</strong>.\n" 
-        +". \n Для этого перейдите по ссылке " + window.location + "/reservations/confirm/" + id + "</p>"
+        +". \n Для этого перейдите по ссылке https://teahousedragon.herokuapp.com/catalog/reservations/confirm/" + id + "</p>"
     }
 };
 
