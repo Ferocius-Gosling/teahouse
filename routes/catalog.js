@@ -4,8 +4,7 @@ var router = express.Router();
 // Требующиеся модули контроллеров.
 var dish_controller = require('../controllers/dishController');
 var table_controller = require('../controllers/tableController');
-
-/// BOOK ROUTES МАРШРУТЫ КНИГ///
+const reservation_controller = require('../controllers/reservationController');
 
 // GET catalog home page.
 router.get('/', dish_controller.index);
@@ -28,5 +27,7 @@ router.get('/reservations/table/:id/reserve', table_controller.table_reserve_get
 
  // POST request to update Book.
 router.post('/reservations/table/:id/reserve', table_controller.table_reserve_post);
+
+router.get('/reservations/confirm/:id', reservation_controller.table_reserve_accept_get);
 
 module.exports = router;

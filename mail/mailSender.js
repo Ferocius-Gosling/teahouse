@@ -8,13 +8,15 @@ var transporter = mailer.createTransport({
     }
 });
 
-var configureMessageOptions = function(to, position) {
+var configureMessageOptions = function(to, position, id) {
     return {
         from: '"Чайная" <titovstepan.shpora@gmail.com>',
         to: to,
         subject: 'Бронь столика',
-        text: "Ваш столик " + position + " успешно забронирован.",
-        html:  "<p>Ваш столик <strong>" + position + "</strong> успешно забронирован.</p>"
+        text: "Вы хотели забронировать столик " + position + 
+        ". \n Для этого перейдите по ссылке " + window.location + "/reservations/confirm/" + id,
+        html:  "<p>Вы хотели забронировать столик <strong>" + position + "</strong>.\n" 
+        +". \n Для этого перейдите по ссылке " + window.location + "/reservations/confirm/" + id + "</p>"
     }
 };
 

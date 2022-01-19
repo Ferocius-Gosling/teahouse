@@ -137,25 +137,46 @@ exports.table_reserve_post = [
                     errors: [{msg: "Столик на это время уже забронирован. Выберите другое время"}]});
                     return;
                 }
+                
+                Reservation.findOne({date: date})
+                .populate('date')
+                .exec(function(err, reservation) {
+                    if (err) {return next(err);}
+                    if (reservation != null)
+                    {
+                        res.render('table_form', {title: "Бронь столика", 
+                        errors: [{msg: "Столик на это время уже забронирован. Но он ожидает подтверждения."}]});
+                        return;
+                    }
+                })
+
                 var reservation = new Reservation({
                     table: results.table,
                     code: results.reservationsCount + 1,
                     date: date
                 })
-
-                results.table.datesReservation.push(date);
-                results.table.save(function(err, table) {
+                reservation.save(function(err, reserve) {
                     if (err) {return next(err); }
-                    
-                    reservation.save(function(err, reserve) { if (err) {return next(err); } })
-                    
-                    mailSender.transporter.sendMail(
-                        mailSender.configureMessageOptions(req.body.email, results.table.position)
-                    )
 
+                    mailSender.transporter.sendMail(
+                        mailSender.configureMessageOptions(req.body.email, results.table.position, reserve._id)
+                    )
                     res.render('table_form', {title: "Бронь столика", 
                     errors: [{msg: "Вам выслано письмо для подтверждения брони."}]});
                 });
+                // results.table.datesReservation.push(date);
+                // results.table.save(function(err, table) {
+                //     if (err) {return next(err); }
+                    
+                //     reservation.save(function(err, reserve) { if (err) {return next(err); } })
+                    
+                //     mailSender.transporter.sendMail(
+                //         mailSender.configureMessageOptions(req.body.email, results.table.position)
+                //     )
+
+                //     res.render('table_form', {title: "Бронь столика", 
+                //     errors: [{msg: "Вам выслано письмо для подтверждения брони."}]});
+                // });
             });
         }
     }

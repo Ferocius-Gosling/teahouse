@@ -19,7 +19,7 @@ reservationSchema
 reservationSchema
     .virtual('url')
     .get(function () {
-        return '/catalog/reservations/table/reserve/' + this._id;
+        return '/catalog/reservations/confirm/' + this._id;
     });
 
 module.exports = mongoose.model('Reservation', reservationSchema);
