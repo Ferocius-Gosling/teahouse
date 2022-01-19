@@ -21,21 +21,20 @@ exports.table_reserve_accept_get = function(req, res, next) {
             return next(err);
         }
         console.log(results.reservation.table);
-        var table = Table.findById(results.reservation.table)
+        Table.findById(results.reservation.table)
         .populate('datesReservation')
         .exec(function(err, tab) {
             if (err) {return next(err);}
+            
+            tab.datesReservation.push(results.reservation.date);
+            tab.save(function(err, table) {
+                if (err) {return next(err); }
         });
-        table.datesReservation.push(results.reservation.date);
-        table.save(function(err, table) {
-            if (err) {return next(err); }
         });
         
         results.reservation.remove(function(err, reservation) {
             if (err) {return next(err); }
-            mailSender.transporter.sendMail(
-                mailSender.configureMessageOptions(req.body.email, results.table.position)
-            )
+
             res.render('reserve_confirm', {title: "Подтверждение"});
             });
         })
