@@ -21,9 +21,13 @@ exports.table_reserve_accept_get = function(req, res, next) {
             return next(err);
         }
         console.log(results.reservation.table);
-
-        results.reservation.table.datesReservation.push(results.reservation.date);
-        results.reservation.table.save(function(err, table) {
+        var table = Table.findById(results.reservation.table)
+        .populate('datesReservation')
+        .exec(function(err, tab) {
+            if (err) {return next(err);}
+        });
+        table.datesReservation.push(results.reservation.date);
+        table.save(function(err, table) {
             if (err) {return next(err); }
         });
         
