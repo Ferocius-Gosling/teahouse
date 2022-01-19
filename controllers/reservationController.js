@@ -9,7 +9,6 @@ exports.table_reserve_accept_get = function(req, res, next) {
         reservation: function(callback){
             Reservation.findById(req.params.id)
             .populate('table')
-            .populate('datesReservation')
             .populate('date')
             .exec(callback);
         }
