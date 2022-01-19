@@ -22,23 +22,24 @@ exports.table_reserve_accept_get = function(req, res, next) {
             return next(err);
         }
         console.log(results.reservation.table);
-        var table = Table.findById(results.reservation.table)
+        var position = null;
+        Table.findById(results.reservation.table)
         .populate('datesReservation')
         .populate('position')
         .exec(function(err, tab) {
             if (err) {return next(err);}
-            
-            tab.datesReservation.push(results.reservation.date);
+            position = tab.position;
+            tab.datesReservation.push(results.reservation.date);        
+            tab.save(function(err, t) {
+                if (err) {return next(err); }
+            });
         });
-        
-        table.save(function(err, t) {
-            if (err) {return next(err); }
-        });
+
         
         results.reservation.remove(function(err, reservation) {
             if (err) {return next(err); }
 
-            res.render('reserve_confirm', {title: "Подтверждение", reservation: results.reservation, table: table});
+            res.render('reserve_confirm', {title: "Подтверждение", reservation: results.reservation, position: position});
             });
         })
 }
