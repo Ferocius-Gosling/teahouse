@@ -1,4 +1,5 @@
 var Table = require('../models/table');
+var console = require('console');
 var Reservation = require('../models/reservation')
 var async = require('async');
 // var console = require('console');
@@ -19,6 +20,7 @@ exports.table_reserve_accept_get = function(req, res, next) {
             err.status = 404;
             return next(err);
         }
+        console.log(results.reservation.table);
 
         results.reservation.table.datesReservation.push(results.reservation.date);
         results.reservation.table.save(function(err, table) {
